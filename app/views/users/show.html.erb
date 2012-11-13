@@ -1,0 +1,29 @@
+<% provide(:title, @user.name) %>
+<div class="well row-fluid" style="display: table;" xmlns="http://www.w3.org/1999/html">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+  <aside class="span1" style="float: right;">
+    <selection>
+      <a href="<%= friendship_path(@user) %>" data-toggle="modal" class="btn btn-success btn-large" onclick="showDialog(this, {user_id: <%= @user.id %>}); return false;">Add friends</a>
+    </selection>
+  </aside>
+</div>
+
+<h2>Friends</h2>
+
+<ul class="nav nav-tabs nav-stacked">
+  <% @user.friends.each do |friend| %>
+  <li>
+    <a href="<%= user_path(friend) %>">
+        <%= gravatar_for friend, size: 16 %>
+        <%= friend.name %>
+    </a>
+  </li>
+  <% end %>
+</ul>

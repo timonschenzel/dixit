@@ -1,0 +1,90 @@
+<% if current_user && @oath %>
+    <script type="text/javascript">
+        $.ajax({
+            url: '<%= "http://graph.facebook.com/#{current_user.uid}" %>',
+            dataType: 'json',
+            success: function(data) {
+                $.each(data, function(key, value){
+                    console.log(key + ': ' + value);
+                });
+                $('div#fb-data').html(data);
+                $('span#fb-name').html(data.name);
+            }
+        });
+    </script>
+
+    <img src="<%= "http://graph.facebook.com/#{current_user.uid}/picture"  %>">
+    <div id="fb-data"></div>
+
+    Welcome <span id="fb-name"></span>!
+    <%= link_to "Sign Out", signout_path %>
+<% end %>
+
+<%= form_tag "/home/show" do %>
+    <%= label_tag "Search for:" %>
+    <%= text_field_tag :url %>
+    <%= submit_tag "Enter" %>
+<% end %>
+
+<% if current_user %>
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#my_games" data-toggle="tab">My games</a></li>
+    <li><a href="#search_games" data-toggle="tab">Find a game</a></li>
+    <li><a href="#new_game" data-toggle="tab">Create a game</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="my_games">
+        <% current_user.games.each  do |game| %>
+          <div class="well">
+            <h2><%= game.name %></h2>
+            <%= game.category.name %>
+          </div>
+        <% end %>
+    </div>
+    <div class="tab-pane" id="search_games">
+        <% @games.each  do |game| %>
+            <div class="well">
+              <h2><%= game.name %></h2>
+              <%= game.category.name %>
+            </div>
+        <% end %>
+    </div>
+    <div class="tab-pane" id="new_game">
+      <%= form_for(@game, remote: true, html: { :'data-callback' => 'invite_friends', :id => 'create_game_form' }) do |f| %>
+          <%= f.label :category %>
+          <%= f.collection_select :category_id, Category.all(order: "name"), :id, :name %>
+
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+
+          <%= f.label :description %>
+          <%= f.text_field :description %>
+
+          <div class="well">
+            <%= f.fields_for(:rounds) do |rf| %>
+                <%= rf.label :story_fragment %>
+                <%= rf.text_area :story_fragment, { rows: 5 } %>
+            <% end %>
+
+            <div class="well">
+              Tags (One word per field!)<br />
+              <div id="tags_container">
+                <%= f.fields_for(:tags) do |rf| %>
+                    <%= rf.text_field :tag %>
+                <% end %>
+              </div>
+              <a href="javascript:;" class="btn btn-large btn-fluid-sub" onclick="add_tag_fields();">Add more tag fields</a>
+            </div>
+
+            <a id="choose_flickr_image" href="<%= home_show_path %>" data-toggle="modal" class="btn btn-success btn-large btn-fluid-sub" onclick="showDialog(this, {  }); return false;">Choose an image from flickr</a>
+          </div>
+
+          <input type="hidden" name="flickr_id" id="flickr_photo_id">
+
+          <%= f.submit "Create your game", class: "btn btn-large btn-primary btn-fluid" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>

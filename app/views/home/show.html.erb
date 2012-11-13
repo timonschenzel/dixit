@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h3>Choose an image from flickr</h3>
+</div>
+<div class="modal-body">
+  <div class="row-fluid">
+    <ul class="thumbnails">
+      <% @photos.each do |photo| %>
+          <li class="row-fluid">
+              <a href="javascript:;" onclick="select_flickr_photo(this, <%= photo.id %>);" data-dismiss="modal" class="thumbnail flickr_photos">
+                <%= image_tag( flickr_image_path(photo), { class: "img-polaroid", style: "height: 200px;" }) %>
+              </a>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+</div>

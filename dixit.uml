@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>RailsDependency</ID>
+  <OriginalElement>#dixit</OriginalElement>
+  <nodes>
+    <node x="-31.0" y="211.0">Picture</node>
+    <node x="-26.0" y="5.5">User</node>
+    <node x="3.0" y="-100.75">Friendship</node>
+    <node x="658.0" y="-69.5">Category</node>
+    <node x="249.5" y="331.0">Vote</node>
+    <node x="232.0" y="29.5">Participant</node>
+    <node x="469.0" y="177.5">Round</node>
+    <node x="418.0" y="-83.5">Game</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Game" target="Round">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Round" target="Participant">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Category" target="Game">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="User" target="Participant">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="User" target="Friendship">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Picture" target="Round">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Picture" target="User">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Picture" target="Vote">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="User" target="Vote">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="419.5" y="160.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Association fields</Category>
+    <Category>Migration fields</Category>
+  </Categories>
+</Diagram>
+
