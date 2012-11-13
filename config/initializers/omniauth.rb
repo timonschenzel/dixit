@@ -1,4 +1,7 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
+  FACEBOOK_KEY = '414916455235699'
+  FACEBOOK_SECRET = 'cea526b14ef60552c80071669430fafe'
+
   provider :facebook, FACEBOOK_KEY, FACEBOOK_SECRET, :scope => 'email,user_birthday,read_stream', :display => 'popup'
 end
 

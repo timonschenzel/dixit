@@ -1,7 +1,6 @@
 Dixit::Application.configure do
   FACEBOOK_KEY = '414916455235699'
   FACEBOOK_SECRET = 'cea526b14ef60552c80071669430fafe'
-
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
